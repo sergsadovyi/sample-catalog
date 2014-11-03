@@ -3,115 +3,30 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-6 col-lg-6 col-md-6">
-            <div class="thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
-                <div class="caption">
-                    <h4 class="pull-right">$24.99</h4>
-                    <h4><a href="#">First Product</a>
-                    </h4>
-                    <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right">15 reviews</p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </p>
-                </div>
-            </div>
+        <div class="col-sm-12 col-lg-12 col-md12">
+            <p class="lead">{{ category.Title | default("All Products")}}</p>
         </div>
 
-        <div class="col-sm-6 col-lg-6 col-md-6">
-            <div class="thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
-                <div class="caption">
-                    <h4 class="pull-right">$64.99</h4>
-                    <h4><a href="#">Second Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right">12 reviews</p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-6 col-md-6">
-            <div class="thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
-                <div class="caption">
-                    <h4 class="pull-right">$74.99</h4>
-                    <h4><a href="#">Third Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right">31 reviews</p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </p>
+        {% for product in products %}
+            <div class="col-sm-6 col-lg-6 col-md-6">
+                <div class="thumbnail">
+                    <img src="{{ product.Image }}" alt="">
+                    <div class="caption" style="height: 150px; overflow: hidden;">
+                        <h4 class="pull-right">{{ product.Price.Currency.Sign }}{{ product.Price.Value }}</h4>
+                        <h4><a href="{{ path('catalog_product', {'categoryAlias': product.Category.Alias, 'productAlias': product.Alias}) }}">{{ product.Title }}</a>
+                        </h4>
+                        <p>{{ product.Description }}</p>
+                    </div>
+                    <div class="ratings" style="padding: 9px;">
+                        <p class="pull-right">{{ product.Ratings | length }} reviews</p>
+                        <p>
+                            {% for i in 0..5 %}
+                                <span class="glyphicon glyphicon-star"></span>
+                            {% endfor %}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-6 col-md-6">
-            <div class="thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
-                <div class="caption">
-                    <h4 class="pull-right">$84.99</h4>
-                    <h4><a href="#">Fourth Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right">6 reviews</p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-6 col-md-6">
-            <div class="thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
-                <div class="caption">
-                    <h4 class="pull-right">$94.99</h4>
-                    <h4><a href="#">Fifth Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right">18 reviews</p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
+        {% endfor %}
     </div>
 {% endblock %}

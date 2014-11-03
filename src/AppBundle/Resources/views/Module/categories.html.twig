@@ -1,0 +1,6 @@
+<p class="lead">Categories</p>
+<div class="list-group">
+    {% for category in categories %}
+    <a href="{{ path('catalog_category', {'categoryAlias': category.Alias}) }}" class="list-group-item{% if current == category.Alias %} active{% endif %}">{{ category.Title }}</a>
+    {% endfor %}
+</div>

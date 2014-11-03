@@ -28,14 +28,14 @@ class Product
      */
     protected $description;
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $image;
+    /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
-    /**
-     * @ORM\Column(type="json_array")
-     */
-    protected $attributes = [];
     /**
      * @ORM\OneToOne(targetEntity="Price", inversedBy="product")
      * @ORM\JoinColumn(name="price_id", referencedColumnName="id")
@@ -232,5 +232,28 @@ class Product
     public function getRatings()
     {
         return $this->ratings;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Product
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     {% block addStyle %}{% endblock %}
-
-    {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' output='css/app.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}?v1.0">
-    {% endstylesheets %}
 </head>
 
 <body>
@@ -24,13 +20,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <p class="lead">Categories</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Cat 1</a>
-                    <a href="#" class="list-group-item">Cat 2</a>
-                    <a href="#" class="list-group-item">Cat 3</a>
-                    <a href="#" class="list-group-item">Cat 4</a>
-                </div>
+                {% render controller('AppBundle:Module:categories', {'request': app.request}) %}
             </div>
             <div class="col-md-6">
                 <ol class="breadcrumb">

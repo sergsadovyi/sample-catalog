@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function getAll($params = [])
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('p');
+        $qb->from('AppBundle:Product', 'p');
+        $qb->orderBy('p.title');
+
+        if (isset($params['category'])) {
+            $qb->where('p.category_id = ?', $params['category']);
+        }
+
+        $query = $qb->getQuery();
+        $products = $query->getResult();
+
+        return $products;
+    }
 }

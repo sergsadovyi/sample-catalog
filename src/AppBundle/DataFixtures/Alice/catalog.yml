@@ -10,6 +10,7 @@
         description: <text(200)>
         category: @cat*
         price: @price<current()>
+        image: "http://placehold.it/320x150"
 \AppBundle\Entity\Price:
     price{1..20}:
         product: @product<current()>

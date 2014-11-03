@@ -36,7 +36,30 @@ class CatalogController extends Controller
      */
     public function categoryAction($categoryAlias)
     {
-        return [];
+        /**
+         * @var \Doctrine\ORM\EntityManager          $em
+         * @var \AppBundle\Entity\CategoryRepository $catRepo
+         * @var \AppBundle\Entity\ProductRepository  $productRepo
+         */
+        $em          = $this->getDoctrine()->getManager();
+        $catRepo     = $em->getRepository('AppBundle:Category');
+        $productRepo = $em->getRepository('AppBundle:Product');
+
+        // Get category info
+        $category = $catRepo->getByAlias($categoryAlias);
+
+        // Get category products
+        $params = [];
+        if (!is_null($category)) {
+            $params['category'] = $category->getId();
+        }
+
+        $products = $productRepo->getAll($params);
+
+        return [
+            'category' => $category,
+            'products' => $products,
+        ];
     }
 
     /**

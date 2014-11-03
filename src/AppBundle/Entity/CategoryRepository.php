@@ -12,4 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * @param $alias
+     *
+     * @return null|Category
+     */
+    public function getByAlias($alias)
+    {
+        $category = $this->findOneBy(['alias' => $alias]);
+        return $category;
+    }
+
+    public function getAll($params = [])
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('c');
+        $qb->from('AppBundle:Category', 'c');
+        $qb->orderBy('c.title');
+
+        $query = $qb->getQuery();
+        $categories = $query->getResult();
+
+        return $categories;
+    }
 }
