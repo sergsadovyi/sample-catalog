@@ -35,7 +35,7 @@ class Product
     /**
      * @ORM\Column(type="json_array")
      */
-    protected $attributes;
+    protected $attributes = [];
     /**
      * @ORM\OneToOne(targetEntity="Price", inversedBy="product")
      * @ORM\JoinColumn(name="price_id", referencedColumnName="id")

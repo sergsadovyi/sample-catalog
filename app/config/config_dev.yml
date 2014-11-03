@@ -34,3 +34,13 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+h4cc_alice_fixtures:
+    default_manager:  orm
+    managers:
+        orm:
+            locale:      en_EN
+            seed:        TestSEED
+            do_flush:    true
+            schema_tool: null
+            doctrine:    "orm"

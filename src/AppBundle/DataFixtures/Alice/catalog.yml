@@ -1,0 +1,28 @@
+\AppBundle\Entity\Category:
+    cat{1..7}:
+        title: <word()>
+        alias: @self->title
+        description: <text(200)>
+\AppBundle\Entity\Product:
+    product{1..20}:
+        title: <sentence(2)>
+        alias: <word()>
+        description: <text(200)>
+        category: @cat*
+        price: @price<current()>
+\AppBundle\Entity\Price:
+    price{1..20}:
+        product: @product<current()>
+        value: <randomFloat(2, 10, 999)>
+        currency: @currency1
+\AppBundle\Entity\Currency:
+    currency1:
+        code: "USD"
+        sign: "$"
+\AppBundle\Entity\Rating:
+    rating{1..100}:
+        product: @product*
+        author: <firstName()>
+        rate: <numberBetween(1,5)>
+        comment: <text()>
+        postDate: <dateTimeThisMonth()>

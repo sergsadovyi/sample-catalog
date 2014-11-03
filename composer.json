@@ -20,7 +20,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "~4.1"
+        "phpunit/phpunit": "~4.1",
+        "h4cc/alice-fixtures-bundle": "~0.5"
     },
     "scripts": {
         "post-root-package-install": [
