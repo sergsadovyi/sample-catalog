@@ -13,23 +13,44 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class CatalogController extends Controller
 {
     /**
-     * Home page with category list and modules
+     * Home page shows products from all categories
      *
      * @Route("/", name="catalog_home")
-     * @Template
      */
     public function homeAction()
+    {
+        $response = $this->forward('AppBundle:Catalog:category', ['categoryAlias' => 'home']);
+
+        return $response;
+    }
+
+    /**
+     * Shows products in the selected category
+     *
+     * @Route("/{categoryAlias}", name="catalog_category", requirements={"categoryAlias" = "[a-z-]+"})
+     * @Template
+     *
+     * @param string  $categoryAlias Category alias
+     *
+     * @return array  Product list
+     */
+    public function categoryAction($categoryAlias)
     {
         return [];
     }
 
-    public function categoryAction($id)
+    /**
+     * Shows information about product
+     *
+     * @Route("/{categoryAlias}/{productAlias}", name="catalog_product", requirements={"categoryAlias" = "[a-z-]+", "productAlias" = "[a-z-]+"})
+     * @Template
+     *
+     * @param string $productAlias  Product alias
+     *
+     * @return array  Product info
+     */
+    public function productAction($productAlias)
     {
-
-    }
-
-    public function productAction($id)
-    {
-
+        return [];
     }
 }

@@ -4,16 +4,64 @@
 <head>
     <title>{% block title %}{% endblock %} | Sample Catalog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/assets/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     {% block addStyle %}{% endblock %}
 
-    {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' output='css/style.css' %}
+    {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' output='css/app.css' %}
     <link rel="stylesheet" href="{{ asset_url }}?v1.0">
     {% endstylesheets %}
 </head>
 
 <body>
-    {% block content %}{% endblock %}
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('catalog_home') }}"><span class="glyphicon glyphicon-shopping-cart"></span> Sample Catalog</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">Categories</p>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Cat 1</a>
+                    <a href="#" class="list-group-item">Cat 2</a>
+                    <a href="#" class="list-group-item">Cat 3</a>
+                    <a href="#" class="list-group-item">Cat 4</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a> </li>
+                    <li><a href="#">Category</a> </li>
+                    <li>Product </li>
+                </ol>
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-md-3">
+                <p class="lead">Shopping Cart</p>
+                <div class="list-group">
+                    <span class="list-group-item"><b>Product Item</b> x 1 = <b class="text-info">$25</b> <i class="glyphicon glyphicon-remove"></i></span>
+                    <span class="list-group-item"><b>Product Item</b> x 1 = <b class="text-info">$25</b> <i class="glyphicon glyphicon-remove"></i></span>
+                    <span class="list-group-item"><b>Product Item</b> x 1 = <b class="text-info">$25</b> <i class="glyphicon glyphicon-remove"></i></span>
+                    <span class="list-group-item list-group-item-success"><b>Total: </b> $125</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <hr/>
+            </div>
+            <div class="row">
+                Copyright &copy;2014 by Sergey Sadovoi
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
