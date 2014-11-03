@@ -51,7 +51,7 @@ class CatalogController extends Controller
         // Get category products
         $params = [];
         if (!is_null($category)) {
-            $params['category'] = $category->getId();
+            $params['category'] = $category;
         }
 
         $products = $productRepo->getAll($params);
@@ -74,6 +74,17 @@ class CatalogController extends Controller
      */
     public function productAction($productAlias)
     {
-        return [];
+        /**
+         * @var \Doctrine\ORM\EntityManager          $em
+         * @var \AppBundle\Entity\ProductRepository  $productRepo
+         */
+        $em          = $this->getDoctrine()->getManager();
+        $productRepo = $em->getRepository('AppBundle:Product');
+
+        $product = $productRepo->getByAlias($productAlias);
+
+        return [
+            'product' => $product,
+        ];
     }
 }

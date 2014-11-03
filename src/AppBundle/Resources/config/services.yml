@@ -1,0 +1,4 @@
+services:
+    app.cache:
+        class: AppBundle\Cache\Memcached
+        arguments: [ "@memcache.default" ]

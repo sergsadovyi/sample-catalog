@@ -12,6 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function getByAlias($alias) {
+        $product = $this->findOneBy(['alias' => $alias]);
+
+        return $product;
+    }
+
     public function getAll($params = [])
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -20,7 +26,8 @@ class ProductRepository extends EntityRepository
         $qb->orderBy('p.title');
 
         if (isset($params['category'])) {
-            $qb->where('p.category_id = ?', $params['category']);
+            $qb->where('p.category = :category');
+            $qb->setParameter('category', $params['category']);
         }
 
         $query = $qb->getQuery();

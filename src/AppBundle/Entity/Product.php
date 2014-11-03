@@ -4,8 +4,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="AppBundle\Entity\ProductRepository")
  * @ORM\Table(name="products")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ProductRepository")
  */
 class Product
 {
@@ -45,6 +45,9 @@ class Product
      * @ORM\OneToMany(targetEntity="Rating", mappedBy="product")
      */
     protected $ratings;
+
+    protected $rate = 0;
+
     /**
      * Constructor
      */
@@ -130,29 +133,6 @@ class Product
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set attributes
-     *
-     * @param array $attributes
-     * @return Product
-     */
-    public function setAttributes($attributes)
-    {
-        $this->attributes = $attributes;
-
-        return $this;
-    }
-
-    /**
-     * Get attributes
-     *
-     * @return array 
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
     }
 
     /**

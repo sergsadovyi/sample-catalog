@@ -17,14 +17,6 @@
                         </h4>
                         <p>{{ product.Description }}</p>
                     </div>
-                    <div class="ratings" style="padding: 9px;">
-                        <p class="pull-right">{{ product.Ratings | length }} reviews</p>
-                        <p>
-                            {% for i in 0..5 %}
-                                <span class="glyphicon glyphicon-star"></span>
-                            {% endfor %}
-                        </p>
-                    </div>
                 </div>
             </div>
         {% endfor %}

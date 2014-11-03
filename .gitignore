@@ -8,3 +8,4 @@
 !app/logs/.gitkeep
 /vendor/
 /bin/
+/dev/
