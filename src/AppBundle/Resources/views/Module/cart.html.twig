@@ -3,7 +3,10 @@
     <div class="list-group">
         {% if cart.Items | length > 0%}
             {% for item in cart.Items %}
-                <span class="list-group-item"><b>{{ item.Title }}</b> x {{ item.Quantity }} = <b class="text-info">${{ item.Quantity * item.Price | round }}</b></span>
+                <span class="list-group-item">
+                    <b>{{ item.Title }}</b> x {{ item.Quantity }} = <b class="text-info">${{ item.Quantity * item.Price | round }}</b>
+                    <i class="glyphicon glyphicon-remove remove" data-product="{{ item.Id }}"></i>
+                </span>
             {% endfor %}
             <span class="list-group-item list-group-item-success"><b>Total: </b> ${{ cart.Total | round }}</span>
         {% else %}

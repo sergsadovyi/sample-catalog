@@ -11,7 +11,7 @@
             <div class="col-sm-6 col-lg-6 col-md-6">
                 <div class="thumbnail">
                     <img src="{{ product.Image }}" alt="">
-                    <div class="caption" style="height: 200px; overflow: hidden;">
+                    <div class="caption">
                         <h4 class="pull-right">{{ product.Price.Currency.Sign }}{{ product.Price.Value }}</h4>
                         <h4><a href="{{ path('catalog_product', {'categoryAlias': product.Category.Alias, 'productAlias': product.Alias}) }}">{{ product.Title }}</a>
                         </h4>

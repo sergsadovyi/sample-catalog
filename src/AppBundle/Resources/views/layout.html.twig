@@ -4,8 +4,15 @@
 <head>
     <title>{% block title %}{% endblock %} | Sample Catalog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    {% block addStyle %}{% endblock %}
+
+    {% stylesheets
+        'vendor/bootstrap/dist/css/bootstrap.css'
+        '@AppBundle/Resources/public/css/*'
+        filter='cssrewrite'
+        output='css/app.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}?v1.0" />
+    {% endstylesheets %}
 </head>
 
 <body data-env="{% if app.environment == 'dev' %}/app_dev.php{% endif %}">
@@ -30,11 +37,11 @@
         </div>
     </footer>
 
-    <script src="/vendor/jquery/dist/jquery.min.js"></script>
     {% javascripts
         'vendor/jquery/dist/jquery.min.js'
         '@AppBundle/Resources/public/js/*'
-        output = 'js/front-libs.js' %}
+        output = 'js/front-libs.js'
+    %}
         <script src="{{ asset_url }}?v1.0"></script>
     {% endjavascripts %}
 

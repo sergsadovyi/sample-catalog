@@ -1,0 +1,7 @@
+.shopping-cart .remove {
+    cursor: pointer;
+    opacity: 0.4;
+}
+.shopping-cart .remove:hover {
+    opacity: 1;
+}

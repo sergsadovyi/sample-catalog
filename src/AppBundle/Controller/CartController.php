@@ -13,21 +13,45 @@ use AppBundle\Shop\Cart;
  */
 class CartController extends Controller
 {
-    public function checkoutAction()
-    {
-        $cart = $this->get('cart');
-    }
-
     /**
      * Add item to cart
      *
      * @Route("/add/{id}", name="cart_add", requirements={"id" = "\d+"})
      * @Template("AppBundle:Module:cart.html.twig")
-     * @param int $id  Product id
      *
+     * @param int $id Product id
+     *
+     * @return array  Cart
      */
     public function addAction($id)
     {
+        return $this->doCart($id, 'add');
+    }
+
+    /**
+     * Del item from cart
+     *
+     * @Route("/del/{id}", name="cart_add", requirements={"id" = "\d+"})
+     * @Template("AppBundle:Module:cart.html.twig")
+     *
+     * @param int $id Product id
+     *
+     * @return array  Cart
+     */
+    public function delAction($id)
+    {
+        return $this->doCart($id, 'del');
+    }
+
+    /**
+     * Process actions on cart
+     *
+     * @param $id
+     * @param $action
+     *
+     * @return array Cart
+     */
+    protected function doCart($id, $action) {
         /**
          * @var \Doctrine\ORM\EntityManager          $em
          * @var \AppBundle\Entity\Product            $product
@@ -42,8 +66,16 @@ class CartController extends Controller
         $cart = $this->get('cart');
 
         $product = $productRepo->find($id);
+
         if (!is_null($product)) {
-            $cart->add($product, 1);
+            switch ($action) {
+                case 'add':
+                    $cart->add($product, 1);
+                    break;
+                case 'del':
+                    $cart->del($product);
+                    break;
+            }
         }
 
         return ['cart' => $cart];
