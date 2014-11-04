@@ -47,6 +47,36 @@ class Cart
         }
 
         $this->token = $cartToken;
+        $this->getCached();
+    }
+
+    /**
+     * Get cart items
+     *
+     * @return array
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Calculate total value of products in cart
+     *
+     * @return float
+     */
+    public function getTotal()
+    {
+        $total = 0;
+
+        /**
+         * @var CartItem $item
+         */
+        foreach ($this->items as $item) {
+            $total += $item->getPrice() * $item->getQuantity();
+        }
+
+        return $total;
     }
 
     /**

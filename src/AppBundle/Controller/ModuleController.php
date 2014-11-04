@@ -3,6 +3,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use AppBundle\Shop\Cart;
 
 /**
  * Controller for Modules
@@ -83,5 +84,20 @@ class ModuleController extends Controller
         }
 
         return ['links' => $links];
+    }
+
+    /**
+      * Return cart module html
+      *
+      * @Template
+      */
+    public function cartAction()
+    {
+        /**
+         * @var Cart $cart
+         */
+        $cart = $this->get('cart');
+
+        return ['cart' => $cart];
     }
 }

@@ -1,4 +1,4 @@
-{% extends 'AppBundle::layout.html.twig' %}
+{% extends 'AppBundle::catalog.html.twig' %}
 {% block title %}Product{% endblock %}
 
 {% block content %}
@@ -8,6 +8,7 @@
             <h4 class="pull-right">{{ product.Price.Currency.Sign }}{{ product.Price.Value }}</h4>
             <h4><a href="{{ path('catalog_product', {'categoryAlias': product.Category.Alias, 'productAlias': product.Alias}) }}">{{ product.Title }}</a>
             </h4>
+            <p><button class="btn btn-success add-to-cart" data-product="{{ product.Id }}">Add to cart</button></p>
             <p>{{ product.Description }}</p>
         </div>
     </div>

@@ -8,7 +8,7 @@
     {% block addStyle %}{% endblock %}
 </head>
 
-<body>
+<body data-env="{% if app.environment == 'dev' %}/app_dev.php{% endif %}">
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -17,26 +17,7 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                {% render controller('AppBundle:Module:categories', {'request': app.request}) %}
-            </div>
-            <div class="col-md-6">
-                {% render controller('AppBundle:Module:breadcrumbs', {'request': app.request}) %}
-                {% block content %}{% endblock %}
-            </div>
-            <div class="col-md-3">
-                <p class="lead">Shopping Cart</p>
-                <div class="list-group">
-                    <span class="list-group-item"><b>Product Item</b> x 1 = <b class="text-info">$25</b> <i class="glyphicon glyphicon-remove"></i></span>
-                    <span class="list-group-item"><b>Product Item</b> x 1 = <b class="text-info">$25</b> <i class="glyphicon glyphicon-remove"></i></span>
-                    <span class="list-group-item"><b>Product Item</b> x 1 = <b class="text-info">$25</b> <i class="glyphicon glyphicon-remove"></i></span>
-                    <span class="list-group-item list-group-item-success"><b>Total: </b> $125</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% block main %}{% endblock %}
 
     <footer>
         <div class="container">
@@ -48,6 +29,15 @@
             </div>
         </div>
     </footer>
+
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    {% javascripts
+        'vendor/jquery/dist/jquery.min.js'
+        '@AppBundle/Resources/public/js/*'
+        output = 'js/front-libs.js' %}
+        <script src="{{ asset_url }}?v1.0"></script>
+    {% endjavascripts %}
+
 </body>
 
 </html>

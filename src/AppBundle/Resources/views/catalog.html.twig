@@ -1,0 +1,17 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% render controller('AppBundle:Module:categories', {'request': app.request}) %}
+            </div>
+            <div class="col-md-6">
+                {% render controller('AppBundle:Module:breadcrumbs', {'request': app.request}) %}
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-md-3">
+                {% render controller('AppBundle:Module:cart') %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
