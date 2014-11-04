@@ -2,3 +2,6 @@ services:
     app.cache:
         class: AppBundle\Cache\Memcached
         arguments: [ "@memcache.default" ]
+    cart:
+        class: Appbundle\Shop\Cart
+        arguments: [ "@app.cache", "@session" ]

@@ -23,11 +23,7 @@
                 {% render controller('AppBundle:Module:categories', {'request': app.request}) %}
             </div>
             <div class="col-md-6">
-                <ol class="breadcrumb">
-                    <li><a href="#">Home</a> </li>
-                    <li><a href="#">Category</a> </li>
-                    <li>Product </li>
-                </ol>
+                {% render controller('AppBundle:Module:breadcrumbs', {'request': app.request}) %}
                 {% block content %}{% endblock %}
             </div>
             <div class="col-md-3">

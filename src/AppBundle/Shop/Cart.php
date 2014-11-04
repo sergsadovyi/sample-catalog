@@ -47,7 +47,6 @@ class Cart
         }
 
         $this->token = $cartToken;
-
     }
 
     /**

@@ -2,8 +2,6 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
@@ -12,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ModuleController extends Controller
 {
     /**
-      * Returns list of categories
+      * Return list of categories
       *
       * @Template
       */
@@ -34,5 +32,56 @@ class ModuleController extends Controller
             'current'    => $current,
         ];
 
+    }
+
+    /**
+      * Return breadcrumbs
+      *
+      * @Template
+      */
+    public function breadcrumbsAction($request)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager          $em
+         * @var \AppBundle\Entity\CategoryRepository $catRepo
+         * @var \AppBundle\Entity\ProductRepository  $productRepo
+         */
+        $em = $this->getDoctrine()->getManager();
+
+        $links = [];
+
+        // Home page
+        $links[] = [
+            'href'  => $this->generateUrl('catalog_home'),
+            'title' => '⌂',
+        ];
+
+        // Category page
+        $categoryAlias = $request->get('categoryAlias', '');
+        if ($categoryAlias != '') {
+            $catRepo  = $em->getRepository('AppBundle:Category');
+            $category = $catRepo->getByAlias($categoryAlias);
+
+            if (!is_null($category)) {
+                $links[] = [
+                    'href'  => $this->generateUrl('catalog_category', ['categoryAlias' => $categoryAlias]),
+                    'title' => $category->getTitle(),
+                ];
+            }
+        }
+
+        // Product page
+        $productAlias = $request->get('productAlias', '');
+        if ($productAlias != '') {
+            $productRepo = $em->getRepository('AppBundle:Product');
+            $product     = $productRepo->getByAlias($productAlias);
+
+            $links[] = [
+                'href'  => $this->generateUrl('catalog_product', ['categoryAlias' => $categoryAlias, 'productAlias' => $productAlias]),
+                'title' => $product->getTitle(),
+            ];
+        }
+
+        return ['links' => $links];
     }
 }
