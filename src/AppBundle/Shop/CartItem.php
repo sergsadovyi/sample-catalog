@@ -108,7 +108,7 @@ class CartItem
     }
 
     /**
-     * New item factory
+     * Creates new CartItem
      *
      * @param Product $product
      *

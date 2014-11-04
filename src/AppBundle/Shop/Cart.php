@@ -5,6 +5,11 @@ use AppBundle\Cache\CacheInterface;
 use AppBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+/**
+ * Cart handler
+ *
+ * Stores Cart Token in Session and Cart Data in Cache
+ */
 class Cart
 {
     /**

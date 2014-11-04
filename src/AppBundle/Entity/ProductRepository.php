@@ -12,12 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    /**
+     * Get product by alias
+     *
+     * @param $alias
+     *
+     * @return null|object
+     */
     public function getByAlias($alias) {
         $product = $this->findOneBy(['alias' => $alias]);
 
         return $product;
     }
 
+    /**
+     * Get all products with selected params
+     *
+     * @param array $params
+     *
+     * @return array  Product list
+     */
     public function getAll($params = [])
     {
         $qb = $this->getEntityManager()->createQueryBuilder();

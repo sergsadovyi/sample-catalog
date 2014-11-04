@@ -1,6 +1,9 @@
 <?php
 namespace AppBundle\Cache;
 
+/**
+ * File Storage
+ */
 class File implements CacheInterface
 {
     /**
@@ -13,6 +16,9 @@ class File implements CacheInterface
         $this->dir = $dir;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function set($key, $value)
     {
         $file = $this->getFilePath($key);
@@ -26,6 +32,9 @@ class File implements CacheInterface
         file_put_contents($file, $value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get($key)
     {
         $file = $this->getFilePath($key);
@@ -36,6 +45,13 @@ class File implements CacheInterface
         return false;
     }
 
+    /**
+     * Builds the full path to cache file
+     *
+     * @param $key
+     *
+     * @return string
+     */
     protected function getFilePath($key)
     {
         return $this->dir . '/storage/' . $key;

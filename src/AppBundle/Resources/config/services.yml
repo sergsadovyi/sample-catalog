@@ -1,10 +1,10 @@
 services:
-    #app.cache:
-    #    class: AppBundle\Cache\Memcached
-    #    arguments: [ "@memcache.default" ]
     app.cache:
-        class: AppBundle\Cache\File
-        arguments: [ "%kernel.cache_dir%" ]
+        class: AppBundle\Cache\Memcached
+        arguments: [ "@memcache.default" ]
+    #app.cache:
+    #    class: AppBundle\Cache\File
+    #    arguments: [ "%kernel.cache_dir%" ]
     cart:
         class: AppBundle\Shop\Cart
         arguments: [ "@app.cache", "@session" ]

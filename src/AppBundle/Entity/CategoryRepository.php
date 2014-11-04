@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository extends EntityRepository
 {
     /**
+     * Get category by alias
+     *
      * @param $alias
      *
      * @return null|Category
@@ -20,10 +22,16 @@ class CategoryRepository extends EntityRepository
     public function getByAlias($alias)
     {
         $category = $this->findOneBy(['alias' => $alias]);
+
         return $category;
     }
 
-    public function getAll($params = [])
+    /**
+     * Get all categories
+     *
+     * @return array  Category list
+     */
+    public function getAll()
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('c');
